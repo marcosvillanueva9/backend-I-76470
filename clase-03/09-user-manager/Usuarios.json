@@ -1,0 +1,56 @@
+[
+  {
+    "nombre": "Lucía",
+    "apellido": "Fernández",
+    "edad": 24,
+    "curso": "Backend"
+  },
+  {
+    "nombre": "Lucía",
+    "apellido": "Fernández",
+    "edad": 24,
+    "curso": "Backend"
+  },
+  {
+    "nombre": "Carlos",
+    "apellido": "Gómez",
+    "edad": 30,
+    "curso": "Frontend"
+  },
+  {
+    "nombre": "Lucía",
+    "apellido": "Fernández",
+    "edad": 24,
+    "curso": "Backend"
+  },
+  {
+    "nombre": "Carlos",
+    "apellido": "Gómez",
+    "edad": 30,
+    "curso": "Frontend"
+  },
+  {
+    "nombre": "Lucía",
+    "apellido": "Fernández",
+    "edad": 24,
+    "curso": "Backend"
+  },
+  {
+    "nombre": "Carlos",
+    "apellido": "Gómez",
+    "edad": 30,
+    "curso": "Frontend"
+  },
+  {
+    "nombre": "Lucía",
+    "apellido": "Fernández",
+    "edad": 24,
+    "curso": "Backend"
+  },
+  {
+    "nombre": "Carlos",
+    "apellido": "Gómez",
+    "edad": 30,
+    "curso": "Frontend"
+  }
+]
