@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Mascotas</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url("/img/banner.png") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: rgba(233, 151, 151, 0.9);
+      padding: 2rem 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #a10d21;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #dea9a9;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      background-color: #131313;
+      color: white;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #a10d21;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registrar Mascota</h2>
+    <form id="petForm" enctype="multipart/form-data">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
+
+      <label for="raza">Raza:</label>
+      <input type="text" id="raza" name="raza" required />
+
+      <label for="file">Foto:</label>
+      <input type="file" id="file" name="file" accept="image/*" required />
+
+      <button type="submit">Guardar Mascota</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('petForm');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch('/api/pets', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          alert(`Mascota "${data.nombre}" guardada correctamente`);
+          form.reset();
+        } else {
+          alert('Ocurrió un error al guardar la mascota');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('No se pudo conectar con el servidor');
+      }
+    });
+  </script>
+</body>
+</html>
