@@ -1,0 +1,22 @@
+<h1>Lista de Usuarios</h1>
+
+{{#if users.length}}
+  <table>
+    <thead>
+      <tr>
+        <th>{{titulodetabla}}</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+        <tr>
+          <td>{{this.nombre}}</td>
+          <td>{{this.email}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>No hay usuarios cargados.</p>
+{{/if}}
