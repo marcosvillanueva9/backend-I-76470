@@ -1,0 +1,11 @@
+use estudiantes
+
+db.alumnos.insertMany([
+  { nombre: "Lucía", apellido: "Gómez", curso: "Backend", correo: "lucia@example.com" },
+  { nombre: "Marcos", apellido: "Pérez", curso: "Frontend", correo: "marcos@example.com" },
+  { nombre: "Ana", apellido: "Martínez", curso: "DevOps", correo: "ana@example.com" },
+  { nombre: "Sofía", apellido: "Lopez", curso: "Data Science", correo: "sofia@example.com" },
+  { nombre: "Pedro", apellido: "Fernández", curso: "Full Stack", correo: "pedro@example.com" }
+])
+
+db.alumnos.find()

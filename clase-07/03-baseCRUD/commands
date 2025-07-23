@@ -1,0 +1,17 @@
+use baseCRUD
+
+db.createCollection("mascotas")
+
+db.mascotas.insertMany([
+  { nombre: "Luna", especie: "Perro", edad: 3 },
+  { nombre: "Michi", especie: "Gato", edad: 2 },
+  { nombre: "Toby", especie: "Perro", edad: 4 }
+])
+
+db.mascotas.find({ especie: "Perro" })
+
+db.mascotas.countDocuments()
+
+// extra
+
+db.mascotas.find().sort({ edad: -1 })

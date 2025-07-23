@@ -1,0 +1,72 @@
+use colegio
+
+// opcional
+db.createCollection("estudiantes")
+
+db.estudiantes.insertMany([
+  {
+    nombre: "Ana",
+    apellido: "González",
+    curso: "Matemática",
+    edad: 20,
+    correo: "ana@mail.com",
+    sexo: "M"
+  },
+  {
+    nombre: "Luis",
+    apellido: "Martínez",
+    curso: "Historia",
+    edad: 22,
+    correo: "luis@mail.com",
+    sexo: "H"
+  },
+  {
+    nombre: "Carla",
+    apellido: "Suárez",
+    curso: "Química",
+    edad: 21,
+    correo: "carla@mail.com",
+    sexo: "M"
+  },
+  {
+    nombre: "Pedro",
+    apellido: "Ramírez",
+    curso: "Literatura",
+    edad: 23,
+    correo: "pedro@mail.com",
+    sexo: "H"
+  },
+  {
+    nombre: "Lucía",
+    apellido: "López",
+    curso: "Biología",
+    edad: 20,
+    correo: "lucia@mail.com",
+    sexo: "M"
+  }
+])
+
+db.estudiantes.insertOne({
+  nombre: "Tomás",
+  apellido: "Vera",
+  curso: "Física"
+})
+
+///////////////////////////////////////
+
+db.estudiantes.find()
+
+db.estudiantes.find({ sexo: "H" })
+
+db.estudiantes.countDocuments()
+
+db.estudiantes.countDocuments({ sexo: "M" })
+
+
+///////////////////////////////////////
+
+db.estudiantes.insertOne({ nombre: "Samuel" })
+
+db.estudiantes.find({}, { nombre: 1, curso: 1, _id: 0 })
+db.estudiantes.find().sort({ edad: -1 })
+db.estudiantes.find().skip(2).limit(3)
