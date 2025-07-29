@@ -1,0 +1,19 @@
+// LISTAR
+db.estudiantes.find().sort({ edad: -1 })
+
+db.estudiantes.find().sort({ edad: 1 }).limit(1)
+
+db.estudiantes.find().sort({ edad: 1 }).skip(1).limit(1)
+
+db.estudiantes.find({ nombre: "Juan" })
+
+db.estudiantes.find({ nombre: "Juan", edad: 29 })
+
+db.estudiantes.find({ nombre: { $in: ["Juan", "Lucia"] } })
+
+// ACTUALIZAR
+
+db.clientes.updateMany(
+  { edad: 25 },
+  { $set: { edad: 26 } }
+)

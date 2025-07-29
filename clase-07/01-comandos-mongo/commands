@@ -1,0 +1,41 @@
+show dbs
+
+use miPrimeraBase
+
+db.createCollection('')
+
+show collections
+
+// para insertar
+db.alumnos.insertOne({ nombre: "Juan", edad: 22 })
+
+db.alumnos.insertMany([
+  { nombre: "Lucía", edad: 25 },
+  { nombre: "Carlos", edad: 20 }
+])
+
+// para buscar
+db.alumnos.find()
+db.alumnos.find({ edad: 22 })
+db.alumnos.findOne({ nombre: "Juan" })
+
+// para actualizar
+db.alumnos.updateOne(
+  { nombre: "Juan" },
+  { $set: { edad: 23 } }
+)
+
+db.alumnos.updateMany(
+  { edad: { $lt: 21 } },
+  { $set: { aprobado: false } }
+)
+
+// para eliminar
+db.alumnos.deleteOne({ nombre: "Carlos" })
+db.alumnos.deleteMany({ edad: { $lt: 21 } })
+
+// otros comandos
+db.alumnos.find().pretty()  // Mostrar con formato
+db.alumnos.countDocuments() // Contar documentos
+
+db.alumnos.estimatedDocumentCount()
