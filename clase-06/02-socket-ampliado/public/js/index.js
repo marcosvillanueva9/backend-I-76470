@@ -1,39 +1,40 @@
 const socket = io();
 
-socket.emit('getChatLog')
-
 let userName = '';
 
 Swal.fire({
-    title: 'Bienvenido al chat!',
-    input: 'text',
-    icon: 'info',
-    inputValidator: (value) => {
-        return !value && 'Tenes que poner un nombre para continuar!'
-    },
-    allowOutsideClick: false
+  title: 'Welcome to the Chat!',
+  input: 'text',
+  text: 'Please enter your name to start chatting.',
+  icon: 'info',
+  inputValidator: (value) => {
+    return !value && 'You need to enter a name to continue!';
+  },
+  allowOutsideClick: false,
 }).then((result) => {
-    if (result.isConfirmed) {
-        userName = result.value
-    }
-})
+  if (result.isConfirmed) {
+    userName = result.value;
+  }
+});
 
-const chatLogElement = document.getElementById('chat-log')
-const chatForm = document.getElementById('chat-form')
-const messageInput = document.getElementById('message')
+socket.emit('getChatLog');
+
+const chatLogElement = document.getElementById('chat-log');
+const chatForm = document.getElementById('chat-form');
+const messageInput = document.getElementById('message');
 
 chatForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const message = messageInput.value
-    socket.emit('mensajito', { userName, message })
-    messageInput.value = ''
-})
+  event.preventDefault();
+  const message = messageInput.value;
+  socket.emit('message', { userName, message });
+  messageInput.value = '';
+});
 
 socket.on('chatLog', (chatLog) => {
-    chatLogElement.innerHTML = ''
-    chatLog.forEach((obj) => {
-        const li = document.createElement('li')
-        li.textContent = `${obj.userName}: ${obj.message}`
-        chatLogElement.appendChild(li)
-    })
-})
+  chatLogElement.innerHTML = '';
+  chatLog.forEach((msg) => {
+    const li = document.createElement('li');
+    li.textContent = `${msg.userName}: ${msg.message}`;
+    chatLogElement.appendChild(li);
+  });
+});

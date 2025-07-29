@@ -1,46 +1,40 @@
-import express from 'express'
-import handlebars from 'express-handlebars'
-import viewsRouter from './src/routes/views.router.js'
+import express from 'express';
+import handlebars from 'express-handlebars';
+import { Server } from 'socket.io';
 
-import { Server } from 'socket.io'
+import viewsRouter from './src/routes/views.router.js';
 
-const app = express()
-const PORT = 8080
+const app = express();
+const PORT = 8080;
 
-app.engine('handlebars', handlebars.engine())
-app.set('view engine', 'handlebars')
-app.set('views', './views')
-app.use(express.static('./public'))
+app.engine('handlebars', handlebars.engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+app.use(express.static('./public'));
 
-app.use('/', viewsRouter)
+app.use('/', viewsRouter);
 
 const server = app.listen(PORT, () => {
-    console.log(`corriendo en el ${PORT}`)
-})
+  console.log(`Server is running on port ${PORT}`);
+});
 
-const sockets = new Server(server)
+const chatLog = [];
 
-const chatLog = []
-let cantidadUsers = 0
+const io = new Server(server);
 
-sockets.on('connection', (socket) => {
-    console.log('New client connected!')
-    cantidadUsers++
-    console.log(`users en linea: ${cantidadUsers}`)
+io.on('connection', (socket) => {
+  console.log('New client connected');
 
-    socket.on('mensajito', data => {
-        chatLog.push({ userName: data.userName, message: data.message})
-        sockets.emit('chatLog', chatLog)
-    })
+    socket.on('message', (data) => {
+        chatLog.push({ userName: data.userName, message: data.message });
+        io.emit('chatLog', chatLog);
+    });
 
-    socket.on('getChatLog', () => {
-        sockets.emit('chatLog', chatLog)
-    })
+  socket.on('getChatLog', () => {
+    socket.emit('chatLog', chatLog);
+  });
 
-    socket.on('disconnect', () => {
-        console.log('se desconecto un usuario')
-        cantidadUsers--
-        console.log(`users en linea: ${cantidadUsers}`)
-    })
-
-})
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
