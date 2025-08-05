@@ -1,0 +1,39 @@
+// Insertar 5000 usuarios con nombres según género
+
+const nombresHombre = ["Marcos", "Juan", "Carlos", "Pedro", "Luis", "Diego", "Matias", "Facundo", "Ezequiel", "Andres", "Javier", "Santiago", "Nicolas", "Gabriel", "Alejandro", "David", "Fernando", "Cristian", "Joaquín", "Tomas"];
+const nombresMujer  = ["Lucía", "Ana", "Sofía", "María", "Camila", "Julieta", "Valentina", "Martina", "Florencia", "Carla", "Isabella", "Victoria", "Renata", "Agustina", "Elena", "Paula", "Gabriela", "Clara", "Mia", "Lola"];
+const apellidos = ["Villanueva", "Gómez", "Pérez", "Fernández", "Rodríguez", "López", "Martínez", "Díaz", "Sánchez", "Romero", "Torres", "Ramírez", "Flores", "Gutiérrez", "Morales", "Rivera", "Cruz", "Reyes", "Ortiz", "Castro"];
+const generos = ["H", "M"];
+const clases = ["backend", "frontend", "devops", "data", "fullstack", "mobile", "testing", "ux/ui", "security", "cloud"];
+
+function getRandomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const users = [];
+
+for (let i = 0; i < 5000; i++) {
+  const genero = getRandomItem(generos);
+  const nombre = genero === "H" ? getRandomItem(nombresHombre) : getRandomItem(nombresMujer);
+  const apellido = getRandomItem(apellidos);
+  const email = `${nombre.toLowerCase()}.${apellido.toLowerCase()}${i}@example.com`;
+  const dni = getRandomInt(20000000, 50000000);
+  const clase = getRandomItem(clases);
+  const edad = getRandomInt(18, 60);
+
+  users.push({
+    nombre,
+    apellido,
+    email,
+    dni,
+    genero,
+    clase,
+    edad
+  });
+}
+
+db.users.insertMany(users);
